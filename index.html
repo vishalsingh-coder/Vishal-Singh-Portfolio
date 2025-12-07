@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -329,6 +328,10 @@
       opacity: 0.6;
       pointer-events: none;
       will-change: transform;
+      /* Mobile optimizations */
+      -webkit-transform: translateX(-50%) translateZ(0);
+      transform-style: preserve-3d;
+      backface-visibility: hidden;
     }
 
     .hero-overlay {
@@ -566,7 +569,7 @@
       position: absolute;
       top: 0;
       left: 50%;
-      transform: translateX(-50%);
+      transform: translateX(-50%) translateZ(0);
       width: 100vw;
       height: 100vh;
       max-height: 100vh;
@@ -575,13 +578,17 @@
       z-index: -1;
       opacity: 0.7;
       pointer-events: none;
+      will-change: transform;
+      -webkit-transform: translateX(-50%) translateZ(0);
+      transform-style: preserve-3d;
+      backface-visibility: hidden;
     }
 
     .skills-video-2 {
       position: absolute;
       top: 100vh;
       left: 50%;
-      transform: translateX(-50%);
+      transform: translateX(-50%) translateZ(0);
       width: 100vw;
       height: 100vh;
       max-height: 100vh;
@@ -590,13 +597,17 @@
       z-index: -1;
       opacity: 0.7;
       pointer-events: none;
+      will-change: transform;
+      -webkit-transform: translateX(-50%) translateZ(0);
+      transform-style: preserve-3d;
+      backface-visibility: hidden;
     }
 
     .skills-video-3 {
       position: absolute;
       top: 200vh;
       left: 50%;
-      transform: translateX(-50%);
+      transform: translateX(-50%) translateZ(0);
       width: 100vw;
       height: 100vh;
       max-height: 100vh;
@@ -605,13 +616,17 @@
       z-index: -1;
       opacity: 0.7;
       pointer-events: none;
+      will-change: transform;
+      -webkit-transform: translateX(-50%) translateZ(0);
+      transform-style: preserve-3d;
+      backface-visibility: hidden;
     }
 
     .skills-video-4 {
       position: absolute;
       top: 300vh;
       left: 50%;
-      transform: translateX(-50%);
+      transform: translateX(-50%) translateZ(0);
       width: 100vw;
       height: 100vh;
       max-height: 100vh;
@@ -620,6 +635,10 @@
       z-index: -1;
       opacity: 0.7;
       pointer-events: none;
+      will-change: transform;
+      -webkit-transform: translateX(-50%) translateZ(0);
+      transform-style: preserve-3d;
+      backface-visibility: hidden;
     }
 
     .skills-overlay {
@@ -767,7 +786,7 @@
       position: absolute;
       top: 0;
       left: 50%;
-      transform: translateX(-50%);
+      transform: translateX(-50%) translateZ(0);
       width: 100vw;
       height: 100vh;
       max-height: 100vh;
@@ -776,6 +795,10 @@
       z-index: -1;
       opacity: 0.7;
       pointer-events: none;
+      will-change: transform;
+      -webkit-transform: translateX(-50%) translateZ(0);
+      transform-style: preserve-3d;
+      backface-visibility: hidden;
     }
 
     .projects-overlay {
@@ -940,7 +963,7 @@
       position: absolute;
       top: 0;
       left: 50%;
-      transform: translateX(-50%);
+      transform: translateX(-50%) translateZ(0);
       width: 100vw;
       height: 100vh;
       max-height: 100vh;
@@ -949,6 +972,10 @@
       z-index: -1;
       opacity: 0.7;
       pointer-events: none;
+      will-change: transform;
+      -webkit-transform: translateX(-50%) translateZ(0);
+      transform-style: preserve-3d;
+      backface-visibility: hidden;
     }
 
     .experience-overlay {
@@ -1073,7 +1100,7 @@
       position: absolute;
       top: 0;
       left: 50%;
-      transform: translateX(-50%);
+      transform: translateX(-50%) translateZ(0);
       width: 100vw;
       height: 100vh;
       max-height: 100vh;
@@ -1082,6 +1109,10 @@
       z-index: -1;
       opacity: 0.7;
       pointer-events: none;
+      will-change: transform;
+      -webkit-transform: translateX(-50%) translateZ(0);
+      transform-style: preserve-3d;
+      backface-visibility: hidden;
     }
 
     .contact-overlay {
@@ -1233,8 +1264,11 @@
         opacity: 0.3;
       }
 
-      /* Disable videos on mobile for performance */
-      .hero-video,
+      /* Optimize videos for mobile - reduce opacity for better performance */
+      .hero-video {
+        opacity: 0.4;
+      }
+
       .skills-video,
       .skills-video-2,
       .skills-video-3,
@@ -1242,7 +1276,24 @@
       .projects-video,
       .experience-video,
       .contact-video {
-        display: none;
+        opacity: 0.35;
+      }
+
+      /* Ensure videos are properly sized on mobile */
+      .hero-video {
+        height: 100%;
+        min-height: 100%;
+      }
+
+      .skills-video,
+      .skills-video-2,
+      .skills-video-3,
+      .skills-video-4,
+      .projects-video,
+      .experience-video,
+      .contact-video {
+        height: 100vh;
+        max-height: 100vh;
       }
 
       /* Reduce backdrop-filter usage on mobile */
@@ -1354,6 +1405,21 @@
       .btn.primary::before {
         transition: none;
       }
+
+      /* Further optimize videos on very small screens */
+      .hero-video {
+        opacity: 0.35;
+      }
+
+      .skills-video,
+      .skills-video-2,
+      .skills-video-3,
+      .skills-video-4,
+      .projects-video,
+      .experience-video,
+      .contact-video {
+        opacity: 0.3;
+      }
     }
   </style>
 </head>
@@ -1385,7 +1451,7 @@
   <main>
     <!-- Hero Section -->
     <section id="home" class="hero section">
-      <video class="hero-video" autoplay muted loop playsinline preload="metadata">
+      <video class="hero-video" muted loop playsinline preload="metadata" data-video="hero1.mp4">
         <source src="hero1.mp4" type="video/mp4">
         Your browser does not support the video tag.
       </video>
@@ -1411,19 +1477,19 @@
 
     <!-- Skills Section -->
     <section id="skills" class="section">
-      <video class="skills-video" autoplay muted loop playsinline preload="metadata">
+      <video class="skills-video" muted loop playsinline preload="none" data-video="heroj.mp4">
         <source src="heroj.mp4" type="video/mp4">
         Your browser does not support the video tag.
       </video>
-      <video class="skills-video-2" autoplay muted loop playsinline preload="none">
+      <video class="skills-video-2" muted loop playsinline preload="none" data-video="heroj.mp4">
         <source src="heroj.mp4" type="video/mp4">
         Your browser does not support the video tag.
       </video>
-      <video class="skills-video-3" autoplay muted loop playsinline preload="none">
+      <video class="skills-video-3" muted loop playsinline preload="none" data-video="heroj.mp4">
         <source src="heroj.mp4" type="video/mp4">
         Your browser does not support the video tag.
       </video>
-      <video class="skills-video-4" autoplay muted loop playsinline preload="none">
+      <video class="skills-video-4" muted loop playsinline preload="none" data-video="heroj.mp4">
         <source src="heroj.mp4" type="video/mp4">
         Your browser does not support the video tag.
       </video>
@@ -1636,7 +1702,7 @@
 
     <!-- Projects Section -->
     <section id="projects" class="section">
-      <video class="projects-video" autoplay muted loop playsinline preload="metadata">
+      <video class="projects-video" muted loop playsinline preload="none" data-video="herok.mp4">
         <source src="herok.mp4" type="video/mp4">
         Your browser does not support the video tag.
       </video>
@@ -1712,7 +1778,7 @@
 
     <!-- Experience Section -->
     <section id="experience" class="section">
-      <video class="experience-video" autoplay muted loop playsinline preload="metadata">
+      <video class="experience-video" muted loop playsinline preload="none" data-video="heroc.mp4">
         <source src="heroc.mp4" type="video/mp4">
         Your browser does not support the video tag.
       </video>
@@ -1747,7 +1813,7 @@
 
     <!-- Contact Section -->
     <section id="contact" class="section">
-      <video class="contact-video" autoplay muted loop playsinline preload="metadata">
+      <video class="contact-video" muted loop playsinline preload="none" data-video="heroe.mp4">
         <source src="heroe.mp4" type="video/mp4">
         Your browser does not support the video tag.
       </video>
@@ -1765,7 +1831,6 @@
           </p>
           <ul>
             <li><strong>Email:</strong> <span>karnvishal071@gmail.com</span></li>
-            <li><strong>GitHub:</strong> <span>github.com/your-github</span></li>
             <li><strong>Location:</strong> <span>India</span></li>
           </ul>
         </div>
@@ -1878,20 +1943,100 @@
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("load", handleReveal);
 
-    // Disable videos on mobile for better performance
-    function disableVideosOnMobile() {
-      if (window.innerWidth <= 880) {
-        const videos = document.querySelectorAll('video');
+    // Lazy load videos - only play when visible in viewport (works for both desktop and mobile)
+    let videoObserver = null;
+    
+    function initVideoLoading() {
+      const videos = document.querySelectorAll('video[data-video]');
+
+      // Clean up existing observer
+      if (videoObserver) {
         videos.forEach(video => {
-          video.pause();
-          video.removeAttribute('autoplay');
+          videoObserver.unobserve(video);
         });
+        videoObserver = null;
+      }
+
+      // Use Intersection Observer for lazy loading on ALL devices
+      videoObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          const video = entry.target;
+          
+          if (entry.isIntersecting) {
+            // Video is in viewport - load and play it
+            if (video.paused) {
+              // Load the video source if not loaded
+              if (video.readyState === 0) {
+                video.load();
+              }
+              
+              // Play the video
+              const playPromise = video.play();
+              if (playPromise !== undefined) {
+                playPromise.catch(error => {
+                  // Auto-play might be blocked - silent fail
+                  console.log('Video autoplay blocked:', error);
+                });
+              }
+            }
+          } else {
+            // Video is out of viewport - pause to save resources
+            if (!video.paused) {
+              video.pause();
+            }
+          }
+        });
+      }, {
+        root: null,
+        rootMargin: '50px', // Start loading 50px before entering viewport
+        threshold: 0.1 // Trigger when 10% of video is visible
+      });
+
+      // Observe all videos
+      videos.forEach(video => {
+        // Ensure autoplay is removed (we control it manually)
+        video.removeAttribute('autoplay');
+        
+        // Observe video for viewport visibility
+        videoObserver.observe(video);
+      });
+
+      // Play hero video immediately since it's always visible on page load
+      const heroVideo = document.querySelector('.hero-video');
+      if (heroVideo) {
+        // Check if hero video is in viewport
+        const heroRect = heroVideo.getBoundingClientRect();
+        const isHeroVisible = heroRect.top < window.innerHeight && heroRect.bottom > 0;
+        
+        if (isHeroVisible) {
+          heroVideo.load();
+          const playPromise = heroVideo.play();
+          if (playPromise !== undefined) {
+            playPromise.catch(error => {
+              // Auto-play blocked - silent fail
+              console.log('Hero video autoplay blocked:', error);
+            });
+          }
+        }
       }
     }
 
-    // Check on load and resize
-    window.addEventListener('load', disableVideosOnMobile);
-    window.addEventListener('resize', disableVideosOnMobile);
+    // Initialize video loading after DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initVideoLoading);
+    } else {
+      // DOM already loaded
+      setTimeout(initVideoLoading, 100);
+    }
+    
+    // Re-initialize on resize (orientation change) - debounced
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        initVideoLoading();
+      }, 300);
+    });
 
     // Set year in footer
     const yearEl = document.getElementById("year");
